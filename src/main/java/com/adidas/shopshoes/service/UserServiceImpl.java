@@ -1,6 +1,5 @@
 package com.adidas.shopshoes.service;
 
-import com.adidas.shopshoes.anotation.IsViewer;
 import com.adidas.shopshoes.dto.UserDTO;
 import com.adidas.shopshoes.dto.UserPrincipal;
 import com.adidas.shopshoes.mapper.UserMapper;
@@ -10,13 +9,12 @@ import com.adidas.shopshoes.model.User;
 import com.adidas.shopshoes.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PostFilter;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -60,6 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepository.findByUsername(username);
