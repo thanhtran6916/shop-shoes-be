@@ -108,8 +108,8 @@ public class ConfigAuthentication extends GlobalMethodSecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/users").hasRole("ADMIN")
-                .antMatchers("/shoes", "/shoes/**").permitAll()
-                .antMatchers("/files", "/files/**").permitAll()
+                .antMatchers("/shoes", "/shoes/**").authenticated()
+                .antMatchers("/files", "/files/**").authenticated()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
